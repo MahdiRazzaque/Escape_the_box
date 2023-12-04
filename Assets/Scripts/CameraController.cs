@@ -14,7 +14,7 @@ public class CameraController : MonoBehaviour {
     public bool invertY;
 
     // Camera Zoom
-    [SerializeField] private float maxCameraZoom; // Camera rotation max limit blah
+    [SerializeField] private float maxCameraZoom; // Camera rotation max limit
     [SerializeField] private float minCameraZoom; // Camera zoom min limit
     [SerializeField] private float camZoom; // Mousewheel input
     [SerializeField] private float camZoomSpeed; // Speed multiplier
@@ -43,7 +43,6 @@ public class CameraController : MonoBehaviour {
         //Get the Y position of the mouse and rotate the pivot.
         float vertical = Input.GetAxis("Mouse Y") * rotateSpeed;
         
-
         if(invertY) {
             pivot.Rotate(vertical, 0, 0);
         } else  {

@@ -162,6 +162,10 @@ public class HealthManager : MonoBehaviour {
             }
         }
     }
+
+    public void SetSpawnPoint(Vector3 newPosition) {
+        respawnPoint = newPosition;  
+    }
 }
 
 
