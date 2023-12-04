@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
-using JetBrains.Annotations;
+using UnityEngine.UI;
 
 public class HealthManager : MonoBehaviour {
 
     public int maxHealth;
     public int currentHealth;
+
+    public int numOfHearts;
+    public Image[] hearts;
+    public Sprite fullHeart;
+    public Sprite emptyHeart;
 
     public playerController thePlayer;
 
@@ -22,8 +26,17 @@ public class HealthManager : MonoBehaviour {
     private Vector3 respawnPoint;
     public float respawnTime;
 
+    public GameObject deathEffect;
+
+    public Image blackScreen;
+    private bool isFadingToBlack;
+    private bool isFadingFromBlack;
+    public float fadeSpeed;
+    public float fadeTime;
+
     void Start() {
         currentHealth = maxHealth;
+        numOfHearts = maxHealth;
         UpdateHealth();
 
         respawnPoint = thePlayer.transform.position;        
@@ -44,6 +57,26 @@ public class HealthManager : MonoBehaviour {
         if (invincibilityCounter <= 0) {
             playerRenderer.enabled = true;
         }
+
+        if(isFadingToBlack) {
+            blackScreen.color = new Color(blackScreen.color.r, blackScreen.color.g, blackScreen.color.b, Mathf.MoveTowards(blackScreen.color.a, 1f, fadeSpeed * Time.deltaTime));
+
+            if(blackScreen.color.a == 1f) {
+                isFadingToBlack = false;
+            }
+        }
+
+        if(isFadingFromBlack) {
+            blackScreen.color = new Color(blackScreen.color.r, blackScreen.color.g, blackScreen.color.b, Mathf.MoveTowards(blackScreen.color.a, 0f, fadeSpeed * Time.deltaTime));
+
+            if(blackScreen.color.a == 0f) {
+                isFadingFromBlack = false;
+            }
+        }
+
+        //Hearts manager
+
+
         
     }
     
@@ -82,10 +115,18 @@ public class HealthManager : MonoBehaviour {
 
     public IEnumerator RespawnCo() {
         isRespawning = true;
-        FindObjectOfType<GameManager>().UpdateHealth(currentHealth, maxHealth, true);
         thePlayer.gameObject.SetActive(false);
+        Instantiate(deathEffect, thePlayer.transform.position, thePlayer.transform.rotation);
+        
+        yield return new WaitForSeconds(respawnTime);
 
-        yield return new WaitForSeconds(0.5f);
+        isFadingToBlack = true;
+
+        yield return new WaitForSeconds(fadeTime);
+        
+        isFadingToBlack = false;
+        isFadingFromBlack = true;
+
         isRespawning = false;
 
         thePlayer.gameObject.SetActive(true);
@@ -104,7 +145,22 @@ public class HealthManager : MonoBehaviour {
     }
 
     public void UpdateHealth() {
-        FindObjectOfType<GameManager>().UpdateHealth(currentHealth, maxHealth, false);
+        if(currentHealth > numOfHearts) {
+            numOfHearts = currentHealth;
+        }
+
+        for(int i = 0; i < hearts.Length; i++) {
+            if(i < currentHealth) {   
+                hearts[i].sprite = fullHeart;
+            } else {
+                hearts[i].sprite = emptyHeart;
+            }
+            if(i < numOfHearts) {
+                hearts[i].enabled = true;
+            } else {
+                hearts[i].enabled = false;
+            }
+        }
     }
 }
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CamerController : MonoBehaviour {
+public class CameraController : MonoBehaviour {
 
     public Transform target;
     public Vector3 offset;
@@ -14,7 +14,7 @@ public class CamerController : MonoBehaviour {
     public bool invertY;
 
     // Camera Zoom
-    [SerializeField] private float maxCameraZoom; // Camera rotation max limit
+    [SerializeField] private float maxCameraZoom; // Camera rotation max limit blah
     [SerializeField] private float minCameraZoom; // Camera zoom min limit
     [SerializeField] private float camZoom; // Mousewheel input
     [SerializeField] private float camZoomSpeed; // Speed multiplier
