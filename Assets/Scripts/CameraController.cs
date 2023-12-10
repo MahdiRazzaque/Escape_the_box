@@ -25,7 +25,6 @@ public class CameraController : MonoBehaviour {
             offset = target.position - transform.position;
 
         pivot.transform.position = target.transform.position;
-        //pivot.transform.parent = target.transform;
         pivot.transform.parent = null;
 
         Cursor.lockState = CursorLockMode.Locked;
