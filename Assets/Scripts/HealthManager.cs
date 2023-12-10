@@ -72,12 +72,7 @@ public class HealthManager : MonoBehaviour {
             if(blackScreen.color.a == 0f) {
                 isFadingFromBlack = false;
             }
-        }
-
-        //Hearts manager
-
-
-        
+        }      
     }
     
     public void HurtPlayer(int damage, Vector3 direction) {

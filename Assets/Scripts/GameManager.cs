@@ -10,15 +10,15 @@ public class GameManager : MonoBehaviour {
     public TextMeshProUGUI goldText;
 
     void Start() {
-        
+
     }
 
     void Update() {
-        
+
     }
 
     public void AddGold(int goldToAdd) {
         currentGold += goldToAdd;
-        goldText.text = "Gold: " + currentGold;
+        goldText.text = currentGold.ToString();
     }
 }

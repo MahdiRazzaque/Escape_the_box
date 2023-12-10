@@ -22,7 +22,7 @@ public class GoldPickup : MonoBehaviour {
             var effect = Instantiate(pickupEffect, transform.position, transform.rotation);
 
             Destroy(gameObject);
-            //Destroy(effect, 1f);
+            Destroy(effect, 1f);
         }
     }
 }
