@@ -23,6 +23,8 @@ public class playerController : MonoBehaviour {
     public float knockBackTime;
     private float knockBackCounter;
 
+    //public AudioSource walkingSound;
+
     void Start() {
         controller = GetComponent<CharacterController>();
     }
@@ -45,8 +47,11 @@ public class playerController : MonoBehaviour {
                     moveDirection.y = jumpForce;
                 }
             }
+
+            //walkingSound.enabled = true;
         } else {
             knockBackCounter -= Time.deltaTime;
+            //walkingSound.enabled = false;
         }
     
         moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
