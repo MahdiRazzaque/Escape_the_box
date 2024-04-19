@@ -33,6 +33,8 @@ public class CameraController : MonoBehaviour {
    
     void LateUpdate() {
 
+        if(FindObjectOfType<MenuController>().isPaused) return;
+
         pivot.transform.position = target.transform.position;
         
         //Get the X position of mouse and rotate target

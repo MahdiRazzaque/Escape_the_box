@@ -111,7 +111,8 @@ public class HealthManager : MonoBehaviour {
     public IEnumerator RespawnCo() {
         isRespawning = true;
         thePlayer.gameObject.SetActive(false);
-        Instantiate(deathEffect, thePlayer.transform.position, thePlayer.transform.rotation);
+        var effect = Instantiate(deathEffect, thePlayer.transform.position, thePlayer.transform.rotation);
+        Destroy(effect, 1f);
         
         yield return new WaitForSeconds(respawnTime);
 
